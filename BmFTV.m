@@ -16,7 +16,9 @@ try
     frame_duration = Screen('GetFlipInterval',w);
     %frame = round(1/frame_duration);
     Screen(w,'BlendFunction',GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    MovieFrames =60;
+    MovieFrames =30;
+    maker = 12 ;
+    square_width = 1;
     [a,b]=WindowCenter(w);
     
     %3D set up
@@ -28,7 +30,7 @@ try
     
     % coordinates
     cm2pixel = 30; %convert centimeter to pixel
-    % Rcircle=6 * cm2pixel; %the visual degress of the radius of the circle is 4 degree, which equal to 4.88 cm (distance to  the screen 70 cm)
+    CoodinateScale = 0.35; 
     spaceofstimulus = 7;
     Rcircle=spaceofstimulus * cm2pixel;
     % positions
@@ -46,10 +48,10 @@ try
         
     % for point-light Rectangle
     rectanglepath = 'rec-xls\';
-    imgformatsuffix = '*.xls';
+    imgformatsuffix = '.xls';
     filelist = {'bothopen','leftrotate','rightopen','upopen','uprightopen',...
-                'urotateopen','lrotateruopen','reverseopen','rrotate'};
-    inputfilepath = strcat( rectanglepath, filelist, '\',imgformatsuffix );
+                'urotatebopen','lrotateruopen','reverseopen','rrotate'};
+    inputfilepath = strcat( rectanglepath, filelist,imgformatsuffix );
     InputName = inputfilepath;
     for i=1:length(InputName)
         MovieData{i} = xlsread(InputName{i});
@@ -103,8 +105,8 @@ try
     WaitSecs(1.5);
     StimulasInterval (w,1,frame_duration);
     RunExperiment(w,wRect,24,frame_duration,...
-    NumSplit,MovieCntre,act,ftvparas,inssetup,pos,...
-    keysetup,subID,MovieFrames,a,b,12,1,inssetup.practiceOver);
+    NumSplit,MovieCntre,ftvparas,inssetup,pos,...
+    keysetup,subID,MovieFrames,a,b,12,1,inssetup.practiceOver,MovieData);
 
     %正式实验
     ShowInstruction(w,inssetup.start,inssetup.base,pos, mod(subID,2)==1);
