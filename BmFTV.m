@@ -57,30 +57,6 @@ try
         MovieData{i} = xlsread(InputName{i});
     end
     
-%     whitepath = 'movie\white\';
-%     imgformatsuffix = '*.jpg';
-%     folderlist = {'leg','jump','run','turn','wave','geo'};
-%     whitefilereglist = {};
-%     whitefolderlist = {};
-%     inputimgpath = '';
-%     for i=1:length(folderlist)
-%         inputimgpath = strcat( whitepath, folderlist{i}, '\' );
-%         whitefolderlist{i} = inputimgpath;
-%         inputimgpath = strcat( inputimgpath,imgformatsuffix );
-%         whitefilereglist{i} = inputimgpath;
-%     end
-% 
-%     whiteactionlist = {};
-%     whiteactionfilm = {};
-%     
-%     for i=1:length(whitefolderlist)
-%         [whiteactionlist{i},whiteactionfilm{i}]...
-%             =tinputimgs(w,whitefilereglist{i},whitefolderlist{i});
-%     end
-%             
-%     % make sprites
-%     act=whiteactionlist;
-    
     % FOR FTV生物运动数据
     ftvparas = tinputparameterfun('walking.txt');
     %End input file================================== 
@@ -104,15 +80,15 @@ try
     PushImages(w,pos,inssetup.practiceStart);
     WaitSecs(1.5);
     StimulasInterval (w,1,frame_duration);
-    RunExperiment(w,wRect,24,frame_duration,...
+    RunExperiment(w,wRect,24,frame_duration,maker,...
     NumSplit,MovieCntre,ftvparas,inssetup,pos,...
     keysetup,subID,MovieFrames,a,b,12,1,inssetup.practiceOver,MovieData);
 
     %正式实验
     ShowInstruction(w,inssetup.start,inssetup.base,pos, mod(subID,2)==1);
-    [answer_code,rtime,response_code,tasktype] = RunExperiment(w,wRect,length(ftvparas.condition),frame_duration,...
+    [answer_code,rtime,response_code,tasktype] = RunExperiment(w,wRect,length(ftvparas.condition),frame_duration,maker,...
     NumSplit,MovieCntre,act,ftvparas,inssetup,pos,...
-    keysetup,subID,MovieFrames,a,b,48,2,inssetup.over);
+    keysetup,subID,MovieFrames,a,b,48,2,inssetup.over,MovieData);
 
     %结束实验
     Screen('Flip',w);
