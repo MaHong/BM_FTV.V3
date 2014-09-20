@@ -12,9 +12,7 @@ try
     Screen('Preference', 'SkipSyncTests', 1);
     screenNumber=max(Screen('Screens'));
     [w, wRect] = PsychImaging('OpenWindow', screenNumber, 0);
-    %[w, wRect]=Screen('OpenWindow',screenNumber, 0,[],32,2);
     frame_duration = Screen('GetFlipInterval',w);
-    %frame = round(1/frame_duration);
     Screen(w,'BlendFunction',GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     MovieFrames =30;
     maker = 12 ;
@@ -81,14 +79,16 @@ try
     WaitSecs(1.5);
     StimulasInterval (w,1,frame_duration);
     RunExperiment(w,wRect,24,frame_duration,maker,...
-    NumSplit,MovieCntre,ftvparas,inssetup,pos,...
-    keysetup,subID,MovieFrames,a,b,12,1,inssetup.practiceOver,MovieData);
+    NumSplit,MovieCntre,ftvparas,inssetup,pos,keysetup,...
+    subID,MovieFrames,a,b,12,1,inssetup.practiceOver,...
+    MovieData,square_width,CoodinateScale);
 
     %正式实验
     ShowInstruction(w,inssetup.start,inssetup.base,pos, mod(subID,2)==1);
     [answer_code,rtime,response_code,tasktype] = RunExperiment(w,wRect,length(ftvparas.condition),frame_duration,maker,...
-    NumSplit,MovieCntre,act,ftvparas,inssetup,pos,...
-    keysetup,subID,MovieFrames,a,b,48,2,inssetup.over,MovieData);
+    NumSplit,MovieCntre,ftvparas,inssetup,pos,keysetup,...
+    subID,MovieFrames,a,b,48,2,inssetup.over,...
+    MovieData,square_width,CoodinateScale);
 
     %结束实验
     Screen('Flip',w);
