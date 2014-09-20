@@ -1,5 +1,5 @@
-function [rtimevalue,response_codevalue,flag] = GetBMtestResponse(w,MovieFrames,act,InputNameIndex,a,b,...
-    keysetup,testid)
+function [rtimevalue,response_codevalue,flag] = GetBMtestResponse(w,MovieFrames,a,b,...
+    keysetup,testid,square_width,MovieData,CoodinateScale,maker)
 % get the keyresponse of BM test array
 % for nochange
 % @testid = 1
@@ -20,7 +20,14 @@ for np=1:actionsreaptimes
             break;
         end
         
-        Screen('DrawTexture',w,act{InputNameIndex(testid)}{i},[],[a-110 b-90 a+110 b+90]);
+        %Screen('DrawTexture',w,act{InputNameIndex(testid)}{i},[],[a-110 b-90 a+110 b+90]);
+        for j=1:maker
+            Screen('FillRect', w ,[255,0,0], ...
+                [a-CoodinateScale*MovieData{testid}((12*(i-1)+j),2)-square_width ...
+                b-CoodinateScale*MovieData{testid}((12*(i-1)+j),3)-square_width...
+                a-CoodinateScale*MovieData{testid}((12*(i-1)+j),2)+square_width ...
+                b-CoodinateScale*MovieData{testid}((12*(i-1)+j),3)+square_width] );
+        end %end-maker
         Screen('Flip',w);
         
         

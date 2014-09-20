@@ -14,7 +14,7 @@ try
     [w, wRect] = PsychImaging('OpenWindow', screenNumber, 0);
     frame_duration = Screen('GetFlipInterval',w);
     Screen(w,'BlendFunction',GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    MovieFrames =30;
+    MovieFrames = 30;
     maker = 12 ;
     square_width = 1;
     [a,b]=WindowCenter(w);
@@ -42,8 +42,7 @@ try
     keysetup = tkeyboardsetup;
     inssetup = tinstructionsetup(w);
     
-    %input file==================================
-        
+    %input file==================================    
     % for point-light Rectangle
     rectanglepath = 'rec-xls\';
     imgformatsuffix = '.xls';
@@ -63,16 +62,16 @@ try
      HideCursor;
      pos = [(a-inssetup.startRect(3)/2) b-inssetup.startRect(4)/2 a+inssetup.startRect(3)/2 b+inssetup.startRect(4)/2];
     
-    %Á·Ï°½×¶ÎÖ¸µ¼Óï
-    ShowInstruction(w,inssetup.start,inssetup.base,pos, mod(subID,2)==1);
-    
-    %Ñ§Ï°FTV/FA
-    DisplayPLWalker(w,wRect,ftvparas,1,3000);
-    PushImages(w,pos,inssetup.FW);
-    ResponseforPLJudgment(keysetup.back);
-    DisplayPLWalker(w,wRect,ftvparas,20,4000);
-    PushImages(w,pos,inssetup.FTV);
-    ResponseforPLJudgment(keysetup.forward);
+%     %Á·Ï°½×¶ÎÖ¸µ¼Óï
+%     ShowInstruction(w,inssetup.start,inssetup.base,pos, mod(subID,2)==1);
+%     
+%     %Ñ§Ï°FTV/FA
+%     DisplayPLWalker(w,wRect,ftvparas,1,3000);
+%     PushImages(w,pos,inssetup.FW);
+%     ResponseforPLJudgment(keysetup.back);
+%     DisplayPLWalker(w,wRect,ftvparas,20,4000);
+%     PushImages(w,pos,inssetup.FTV);
+%     ResponseforPLJudgment(keysetup.forward);
     
     %Á·Ï°½×¶Î
     PushImages(w,pos,inssetup.practiceStart);

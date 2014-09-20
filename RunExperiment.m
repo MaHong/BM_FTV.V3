@@ -36,17 +36,18 @@ for trial = 1:tiralnum
     
     %display the memory array
     InputNameIndex = randperm(NumSplit); %random the stimuli
+    SetSize = str2num(ftvparas.condition{trial}(3));
     NumMovie=4;
     actionreapettimes = 3;
     for rp=1:actionreapettimes
         for i=1:MovieFrames
-            for np=1:NumMovie
+            for MovieIndex=1:SetSize
                 for j=1:maker
-                Screen('FillRect', w ,[],...
-                    [position_presentation(np,1)-CoodinateScale*MovieData{InputNameIndex(np)}((12*(i-1)+j),2)-square_width...
-                     position_presentation(np,2)-CoodinateScale*MovieData{InputNameIndex(np)}((12*(i-1)+j),3)-square_width...
-                     position_presentation(np,1)-CoodinateScale*MovieData{InputNameIndex(np)}((12*(i-1)+j),2)-square_width...
-                     position_presentation(np,2)--CoodinateScale*MovieData{InputNameIndex(np)}((12*(i-1)+j),3)-square_width]);
+                Screen('FillRect', w ,[255 255 255],...
+                    [position_presentation(MovieIndex,1)-CoodinateScale*MovieData{InputNameIndex(MovieIndex)}((12*(i-1)+j),2)-square_width...
+                     position_presentation(MovieIndex,2)-CoodinateScale*MovieData{InputNameIndex(MovieIndex)}((12*(i-1)+j),3)-square_width...
+                     position_presentation(MovieIndex,1)-CoodinateScale*MovieData{InputNameIndex(MovieIndex)}((12*(i-1)+j),2)+square_width...
+                     position_presentation(MovieIndex,2)-CoodinateScale*MovieData{InputNameIndex(MovieIndex)}((12*(i-1)+j),3)+square_width]);
                 end
             end
             Screen('Flip',w);
@@ -69,14 +70,16 @@ for trial = 1:tiralnum
             ( experimenttype==experimenttype&&(xor(mod(subID,2)==1,(trial>resttrial&&trial<=resttrial*3)  )) ) )
         while GetSecs - start_time < 3
             if str2num(ftvparas.condition{trial}(2))==0     %% bm no change
-                [rtimeval,response_codeval,terminateflag] = GetBMtestResponse(w,MovieFrames,act,InputNameIndex,a,b,keysetup,1);
+                [rtimeval,response_codeval,terminateflag] = GetBMtestResponse(w,MovieFrames,a,b,keysetup,1,...
+                                                                              square_width,MovieData,CoodinateScale,maker);
                 rtime(trial) = rtimeval;
                 response_code(trial)=response_codeval;
                 if terminateflag==1
                     break;
                 end
             else                                   %% bm change
-                [rtimeval,response_codeval,terminateflag] = GetBMtestResponse(w,MovieFrames,act,InputNameIndex,a,b,keysetup,(NumMovie+1) );
+                [rtimeval,response_codeval,terminateflag] = GetBMtestResponse(w,MovieFrames,a,b,keysetup,(NumMovie+1),...
+                                                                              square_width,MovieData,CoodinateScale,maker);
                 rtime(trial) = rtimeval;
                 response_code(trial) = response_codeval;
                 if terminateflag==1
