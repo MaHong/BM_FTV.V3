@@ -29,11 +29,11 @@ try
     % coordinates
     cm2pixel = 30; %convert centimeter to pixel
     CoodinateScale = 0.35; 
-    spaceofstimulus = 7;
+    spaceofstimulus = 4.88;
     Rcircle=spaceofstimulus * cm2pixel;
     % positions
     n=1;
-    NumSplit=6;
+    NumSplit=5;
     PerDegree= (360/NumSplit)/180 * pi;%Convert to Pi
     for i=1:NumSplit
         MovieCntre(n,:) = [a+Rcircle*cos(i*PerDegree)   b+Rcircle*sin(i*PerDegree)];
@@ -78,16 +78,16 @@ try
     WaitSecs(1.5);
     StimulasInterval (w,1,frame_duration);
     RunExperiment(w,wRect,24,frame_duration,maker,...
-    NumSplit,MovieCntre,ftvparas,inssetup,pos,keysetup,...
-    subID,MovieFrames,a,b,12,1,inssetup.practiceOver,...
-    MovieData,square_width,CoodinateScale);
+                  NumSplit,MovieCntre,ftvparas,inssetup,pos,keysetup,...
+                  subID,MovieFrames,a,b,12,1,inssetup.practiceOver,...
+                  MovieData,square_width,CoodinateScale);
 
     %正式实验
     ShowInstruction(w,inssetup.start,inssetup.base,pos, mod(subID,2)==1);
     [answer_code,rtime,response_code,tasktype] = RunExperiment(w,wRect,length(ftvparas.condition),frame_duration,maker,...
-    NumSplit,MovieCntre,ftvparas,inssetup,pos,keysetup,...
-    subID,MovieFrames,a,b,48,2,inssetup.over,...
-    MovieData,square_width,CoodinateScale);
+                                                               NumSplit,MovieCntre,ftvparas,inssetup,pos,keysetup,...
+                                                               subID,MovieFrames,a,b,48,2,inssetup.over,...
+                                                               MovieData,square_width,CoodinateScale);
 
     %结束实验
     Screen('Flip',w);

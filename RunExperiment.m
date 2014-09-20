@@ -28,7 +28,7 @@ for trial = 1:tiralnum
     
     % define the position of the memory display
     position_index = randperm(NumSplit);% Randomized the positions
-    position_presentation = zeros(NumSplit,2);% 6*2 zero vector
+    position_presentation = zeros(NumSplit,2);% 5*2 zero vector
     for i=1:NumSplit
         position_presentation(i,1) = MovieCntre(position_index(i),1);
         position_presentation(i,2) = MovieCntre(position_index(i),2);
@@ -37,7 +37,7 @@ for trial = 1:tiralnum
     %display the memory array
     InputNameIndex = randperm(NumSplit); %random the stimuli
     SetSize = str2num(ftvparas.condition{trial}(3));
-    NumMovie=4;
+    %NumMovie=4;
     actionreapettimes = 3;
     for rp=1:actionreapettimes
         for i=1:MovieFrames
@@ -80,16 +80,16 @@ for trial = 1:tiralnum
             ( experimenttype==experimenttype&&(xor(mod(subID,2)==1,(trial>resttrial&&trial<=resttrial*3)  )) ) )
         while GetSecs - start_time < 3
             if str2num(ftvparas.condition{trial}(2))==0     %% bm no change
-                [rtimeval,response_codeval,terminateflag] = GetBMtestResponse(w,MovieFrames,a,b,keysetup,1,...
-                                                                              square_width,MovieData,CoodinateScale,maker);
+                [rtimeval,response_codeval,terminateflag] = GetBMtestResponse(w,MovieFrames,a,b,keysetup,SetSize,...
+                                                                              square_width,MovieData,CoodinateScale,maker,InputNameIndex);
                 rtime(trial) = rtimeval;
                 response_code(trial)=response_codeval;
                 if terminateflag==1
                     break;
                 end
             else                                   %% bm change
-                [rtimeval,response_codeval,terminateflag] = GetBMtestResponse(w,MovieFrames,a,b,keysetup,(NumMovie+1),...
-                                                                              square_width,MovieData,CoodinateScale,maker);
+                [rtimeval,response_codeval,terminateflag] = GetBMtestResponse(w,MovieFrames,a,b,keysetup,(SetSize+1),...
+                                                                              square_width,MovieData,CoodinateScale,maker,InputNameIndex);
                 rtime(trial) = rtimeval;
                 response_code(trial) = response_codeval;
                 if terminateflag==1
@@ -101,7 +101,7 @@ for trial = 1:tiralnum
     else   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%unload 条件  基线水平
         while GetSecs - start_time < 3
             [rtimeval,response_codeval,terminateflag] =  GetBaseResponse(w,trial,ftvparas,MovieFrames,a,b,keysetup,...
-                                                                         square_width,MovieData,CoodinateScale,maker);
+                                                                         square_width,MovieData,CoodinateScale,maker,SetSize,InputNameIndex);
             rtime(trial) = rtimeval;
             response_code(trial)=response_codeval;
             if terminateflag==1
