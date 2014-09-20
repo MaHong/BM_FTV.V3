@@ -29,6 +29,14 @@ for np=1:actionsreaptimes
                 b-CoodinateScale*MovieData{testid}((12*(i-1)+j),3)+square_width] );
         end %end-maker
         Screen('Flip',w);
+        for j=1:maker   % repeat the same codes to slow the actions
+            Screen('FillRect', w ,[255,0,0], ...
+                [a-CoodinateScale*MovieData{testid}((12*(i-1)+j),2)-square_width ...
+                b-CoodinateScale*MovieData{testid}((12*(i-1)+j),3)-square_width...
+                a-CoodinateScale*MovieData{testid}((12*(i-1)+j),2)+square_width ...
+                b-CoodinateScale*MovieData{testid}((12*(i-1)+j),3)+square_width] );
+        end %end-maker
+        Screen('Flip',w);
         
         
         [keyisdown,secs,keycode] = KbCheck;

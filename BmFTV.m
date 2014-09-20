@@ -62,16 +62,16 @@ try
      HideCursor;
      pos = [(a-inssetup.startRect(3)/2) b-inssetup.startRect(4)/2 a+inssetup.startRect(3)/2 b+inssetup.startRect(4)/2];
     
-%     %Á·Ï°½×¶ÎÖ¸µ¼Óï
-%     ShowInstruction(w,inssetup.start,inssetup.base,pos, mod(subID,2)==1);
-%     
-%     %Ñ§Ï°FTV/FA
-%     DisplayPLWalker(w,wRect,ftvparas,1,3000);
-%     PushImages(w,pos,inssetup.FW);
-%     ResponseforPLJudgment(keysetup.back);
-%     DisplayPLWalker(w,wRect,ftvparas,20,4000);
-%     PushImages(w,pos,inssetup.FTV);
-%     ResponseforPLJudgment(keysetup.forward);
+    %Á·Ï°½×¶ÎÖ¸µ¼Óï
+    ShowInstruction(w,inssetup.start,inssetup.base,pos, mod(subID,2)==1);
+    
+    %Ñ§Ï°FTV/FA
+    DisplayPLWalker(w,wRect,ftvparas,1,3000);
+    PushImages(w,pos,inssetup.FW);
+    ResponseforPLJudgment(keysetup.back);
+    DisplayPLWalker(w,wRect,ftvparas,20,4000);
+    PushImages(w,pos,inssetup.FTV);
+    ResponseforPLJudgment(keysetup.forward);
     
     %Á·Ï°½×¶Î
     PushImages(w,pos,inssetup.practiceStart);

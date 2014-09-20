@@ -1,4 +1,5 @@
-function [rtimevalue,response_codevalue,flag] =  GetBaseResponse(w,trial,ftvparas,act,MovieFrames,InputNameIndex,a,b,keysetup)
+function [rtimevalue,response_codevalue,flag] =  GetBaseResponse(w,trial,ftvparas,MovieFrames,a,b,keysetup,...
+                                                                 square_width,MovieData,CoodinateScale,maker)
 
 flag = 0;
 start_time = GetSecs;
@@ -13,8 +14,22 @@ if str2num(ftvparas.condition{trial}(2))==0 || str2num(ftvparas.condition{trial}
             if flag==1;
                 break;
             end
-            
-            Screen('DrawTexture',w,act{InputNameIndex(1)}{i},[],[a-110 b-90 a+110 b+90]);
+               
+           for j=1:maker
+            Screen('FillRect', w ,[255,0,0], ...
+                [a-CoodinateScale*MovieData{1}((12*(i-1)+j),2)-square_width ...
+                b-CoodinateScale*MovieData{1}((12*(i-1)+j),3)-square_width...
+                a-CoodinateScale*MovieData{1}((12*(i-1)+j),2)+square_width ...
+                b-CoodinateScale*MovieData{1}((12*(i-1)+j),3)+square_width] );
+        end %end-maker
+        Screen('Flip',w);
+        for j=1:maker   % repeat the same codes to slow the actions
+            Screen('FillRect', w ,[255,0,0], ...
+                [a-CoodinateScale*MovieData{1}((12*(i-1)+j),2)-square_width ...
+                b-CoodinateScale*MovieData{1}((12*(i-1)+j),3)-square_width...
+                a-CoodinateScale*MovieData{1}((12*(i-1)+j),2)+square_width ...
+                b-CoodinateScale*MovieData{1}((12*(i-1)+j),3)+square_width] );
+        end %end-maker
             Screen('Flip',w);
             
             [keyisdown,secs,keycode] = KbCheck;
