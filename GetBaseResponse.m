@@ -1,5 +1,5 @@
 function [rtimevalue,response_codevalue,flag] =  GetBaseResponse(w,trial,ftvparas,MovieFrames,a,b,keysetup,...
-                                                                 square_width,MovieData,CoodinateScale,maker,SetSize,InputNameIndex)
+                                                                 square_width,MovieData,CoodinateScale,maker,testid,InputNameIndex)
 
 flag = 0;
 start_time = GetSecs;
@@ -14,7 +14,7 @@ if str2num(ftvparas.condition{trial}(2))==0 || str2num(ftvparas.condition{trial}
             if flag==1;
                 break;
             end
-            MovieIndex= InputNameIndex(SetSize); 
+            MovieIndex= InputNameIndex(testid); 
            for j=1:maker
             Screen('FillRect', w ,[255,0,0], ...
                 [a-CoodinateScale*MovieData{MovieIndex}((12*(i-1)+j),2)-square_width ...

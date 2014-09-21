@@ -98,17 +98,27 @@ for trial = 1:tiralnum
             end  %end if
         end %end -while
         tasktype(trial) = 1;%记忆任务
-    else   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%unload 条件  基线水平
-        while GetSecs - start_time < 3
-            [rtimeval,response_codeval,terminateflag] =  GetBaseResponse(w,trial,ftvparas,MovieFrames,a,b,keysetup,...
-                                                                         square_width,MovieData,CoodinateScale,maker,SetSize,InputNameIndex);
-            rtime(trial) = rtimeval;
-            response_code(trial)=response_codeval;
-            if terminateflag==1
-                break;
+        else   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%unload 条件  基线水平
+            while GetSecs - start_time < 3
+                if str2num(ftvparas.condition{trial}(2))==0     %% bm no change
+                    [rtimeval,response_codeval,terminateflag] =  GetBaseResponse(w,trial,ftvparas,MovieFrames,a,b,keysetup,...
+                                                                                 square_width,MovieData,CoodinateScale,maker,SetSize,InputNameIndex);
+                    rtime(trial) = rtimeval;
+                    response_code(trial)=response_codeval;
+                    if terminateflag==1
+                        break;
+                    end
+                else                                   %% bm change
+                    [rtimeval,response_codeval,terminateflag] =  GetBaseResponse(w,trial,ftvparas,MovieFrames,a,b,keysetup,...
+                                                                                 square_width,MovieData,CoodinateScale,maker,(SetSize+1),InputNameIndex);
+                    rtime(trial) = rtimeval;
+                    response_code(trial)=response_codeval;
+                    if terminateflag==1
+                        break;
+                    end
+                end  
             end
-        end
-         tasktype(trial) = 0;%控制条件
+        tasktype(trial) = 0;%控制条件
     end
     
     [keyisdown,secs,keycode] = KbCheck;
