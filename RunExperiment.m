@@ -35,7 +35,7 @@ for trial = 1:tiralnum
     end
     
     %display the memory array
-    InputNameIndex = randperm(NumSplit); %random the stimuli
+    InputNameIndex = randperm(9); %random the stimuli
     SetSize = str2num(ftvparas.condition{trial}(3));
     %NumMovie=4;
     actionreapettimes = 3;
